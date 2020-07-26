@@ -14,16 +14,18 @@ Additional configuration:
     - Parameter name: checkpoint
     - It is loaded from /input
 """
-import os
+from evaluate import ffwd_to_img
 from flask import Flask, send_file, request
+import os
 from werkzeug.exceptions import BadRequest
 from werkzeug.utils import secure_filename
 
-from evaluate import ffwd_to_img
-
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+
 app = Flask(__name__)
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=["POST"])
 def style_transfer():
@@ -34,27 +36,18 @@ def style_transfer():
     input_file = request.files.get('file')
     if not input_file:
         return BadRequest("File not present in request")
-
     filename = secure_filename(input_file.filename)
     if filename == '':
         return BadRequest("File name is not present in request")
     if not allowed_file(filename):
         return BadRequest("Invalid file type")
-
     input_filepath = os.path.join('./images/', filename)
     output_filepath = os.path.join('/output/', filename)
     input_file.save(input_filepath)
-
     # Get checkpoint filename from la_muse
     checkpoint = request.form.get("checkpoint", "la_muse.ckpt")
     ffwd_to_img(input_filepath, output_filepath, '/input/' + checkpoint, '/gpu:0')
     return send_file(output_filepath, mimetype='image/jpg')
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
