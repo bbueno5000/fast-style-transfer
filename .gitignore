@@ -3,12 +3,10 @@ deps.txt
 archive
 saver
 *~
-styles
 pngs
 preds
 
 *.sw*
-data
 __pycache__/
 *.py[cod]
 *$py.class
