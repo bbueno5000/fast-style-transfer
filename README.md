@@ -14,11 +14,14 @@ It takes 100ms on a 2015 Titan X to style the MIT Stata Center (1024×680) like 
 Add styles from famous paintings to any photo or video.
 
 This implementation is based off of
- A Neural Algorithm of Artistic Style [1],
- Perceptual Losses for Real-Time Style Transfer and Super-Resolution [2],
- Instance Normalization [3]. 
+[A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576),
+[Perceptual Losses for Real-Time Style Transfer and Super-Resolution](http://cs.stanford.edu/people/jcjohns/eccv16/),
+[Instance Normalization](https://arxiv.org/abs/1607.08022). 
 
 ## Materials
+
+Floyd requirements are specified in the `floyd_requirements.txt` file.
+They will be installled before running your code.
 
 ### Requirements
 
@@ -30,9 +33,6 @@ This implementation is based off of
 - A decent GPU (if you want to train and don't want to wait 4 months):
 - All the required NVIDIA software to run TF on a GPU (CUDA, etc)
 - ffmpeg 3.1.3 (if you want to stylize video)
-
-Floyd requirements are specified in the `floyd_requirements.txt` file.
-They will be installled before running your code.
 
 ## Procedures
 
@@ -224,9 +224,3 @@ This project could not have happened without the advice (and GPU access) given b
 The project also borrowed some code from Anish's [Neural Style](https://github.com/anishathalye/neural-style/)
 Some readme/docs formatting was borrowed from Justin Johnson's [Fast Neural Style](https://github.com/jcjohnson/fast-neural-style)
 The image of the Stata Center at the very beginning of the README was taken by [Juan Paulo](https://juanpaulo.me/)
-
-## References
-
-1. [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576)
-2. [Perceptual Losses for Real-Time Style Transfer and Super-Resolution](http://cs.stanford.edu/people/jcjohns/eccv16/)
-3. [Instance Normalization](https://arxiv.org/abs/1607.08022) 
